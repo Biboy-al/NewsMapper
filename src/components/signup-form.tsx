@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
+import { signUp } from "@/lib/db"
 
 export function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,6 +21,7 @@ export function SignupForm() {
     confirmPassword: "",
     agreeToTerms: false,
   })
+
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const validateForm = () => {
@@ -62,7 +65,8 @@ export function SignupForm() {
     setIsLoading(true)
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    // await new Promise((resolve) => setTimeout(resolve, 1500))
+    await signUp(formData.email, formData.password, formData.fullName)
 
     // For demo purposes, redirect to dashboard
     window.location.href = "/dashboard"
@@ -222,6 +226,7 @@ export function SignupForm() {
         type="submit"
         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
         disabled={isLoading}
+        onClick={handleSubmit}
       >
         {isLoading ? "Creating account..." : "Create account"}
       </Button>

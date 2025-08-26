@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
+import { sign } from "crypto"
+import { signInWithEmail } from "@/lib/db"
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -21,10 +23,17 @@ export function LoginForm() {
     setIsLoading(true)
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // await new Promise((resolve) => setTimeout(resolve, 1000))
 
+    const isUser: boolean = await signInWithEmail(formData.email, formData.password)
+
+    if  (isUser){
+      alert("Login successful!")
+      window.location.href = "/dashboard"
+    }else{
+      alert("Login failed. Please check your credentials.")
     // For demo purposes, redirect to dashboard
-    window.location.href = "/dashboard"
+    }
 
     setIsLoading(false)
   }

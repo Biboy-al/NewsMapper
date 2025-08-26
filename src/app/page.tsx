@@ -6,7 +6,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="text-center space-y-6 max-w-md">
         <div className="space-y-2">
-          <h1 className="text-4xl font-serif font-black text-primary">NewsHub</h1>
+          <h1 className="text-4xl font-serif font-black text-primary">MindMapper</h1>
           <p className="text-lg text-muted-foreground">Your trusted news aggregator</p>
         </div>
 
